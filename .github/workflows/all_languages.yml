@@ -1,0 +1,64 @@
+name: Run Hello World for All Languages
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Python
+      - name: Run Python Hello World
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python hello.py
+
+      # Java
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+      - run: javac HelloWorld.java && java HelloWorld
+
+      # Go
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - run: go run main.go
+
+      # Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21'
+      - run: node hello.js
+
+      # C++
+      - name: Compile and Run C++ Hello World
+        run: g++ -o hello HelloWorld.cpp && ./hello
+
+      # .NET (C#)
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Run .NET Hello World
+        run: |
+          dotnet new console -n HelloWorldApp --force
+          mv Program.cs HelloWorldApp/Program.cs
+          cd HelloWorldApp
+          dotnet run
+
+      # Shell Script
+      - name: Run Shell Script Hello World
+        run: bash hello.sh
+
