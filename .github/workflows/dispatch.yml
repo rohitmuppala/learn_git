@@ -1,0 +1,23 @@
+name: Dispatch to Orchestrator
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send dispatch event to orchestration repo
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT_FOR_ORCHESTRATION }}
+          repository: https://github.com/rohitmuppala/learn_sre.git
+          event-type: microservice-updated
+          client-payload: |
+            {
+              "service": "learn-git",
+              "commit": "${{ github.sha }}",
+              "repo": "${{ github.repository }}"
+            }
+
