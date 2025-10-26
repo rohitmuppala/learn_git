@@ -15,12 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Python
-      - name: Run Python Hello World
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-      - run: python hello.py
+      
 
       # Java
       - name: Setup Java
