@@ -12,7 +12,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.PAT_FOR_ORCHESTRATION }}
-          repository: repository: rohitmuppala/learn_sre
+          repository: rohitmuppala/learn_sre
           event-type: microservice-updated
           client-payload: |
             {
